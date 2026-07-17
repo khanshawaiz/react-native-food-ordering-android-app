@@ -1,10 +1,9 @@
-import { StyleSheet } from 'react-native';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View  } from 'react-native';
 
-export default function SettingsScreen() {
+export default function TabTwo() {
   return (
     <View style={styles.container}>
-      <Text>Welcome to Settings Tab1</Text>
+      <Text>Welcome to Settings Tab!</Text>
     </View>
   );
 }
