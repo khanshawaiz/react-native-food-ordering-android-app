@@ -2,7 +2,18 @@
 EXPO APP - DAILY WORKFLOW
 ========================================
 
-1️⃣ FOR WIFI :
+1 FOR Andriod Studio :
+----------------------------------------
+Run emulator on Andriod Studio
+Run: adb devices in cmd
+
+Terminal (every time):
+  nvm use 18.20.8
+  npx expo start
+  Press a
+
+
+2 FOR WIFI :
 ----------------------------------------
 Terminal (every time):
   nvm use 18.20.8
@@ -14,21 +25,21 @@ Phone:
 
 
 
-2️⃣ FOR USB:
+3 FOR USB:
 ----------------------------------------
 1. Plug phone via USB
 2. Enable USB Debugging on phone
 
 Terminal:
   nvm use 18.20.8
-  C:\Users\Shawaiz\Downloads\platform-tools\adb.exe reverse tcp:8081 tcp:8081
+ adb reverse tcp:8081 tcp:8081
   npx expo start
 
 Phone:
   Scan QR code
 
 
-3️⃣ AFTER CODING:
+4 AFTER CODING:
 ----------------------------------------
 git add .
 git commit -m "Your message"

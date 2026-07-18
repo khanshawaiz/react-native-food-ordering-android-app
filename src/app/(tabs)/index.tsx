@@ -19,7 +19,7 @@ export default function TabOne() {
 
 const styles = StyleSheet.create({
   container: {
-   backgroundColor : 'pink',
+   backgroundColor : 'white',
    padding : 10,
    borderRadius : 20,
    
