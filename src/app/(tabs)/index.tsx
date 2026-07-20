@@ -1,13 +1,18 @@
-import {View} from 'react-native';
-import products from '../../../data/products';
-import ProductListItem from '../../../src/components/ProductListItem';
+import {View,  ScrollView } from 'react-native';
+import products from '@data/products';
+import ProductListItem from '@/components/ProductListItem';
 
 export default function Menu() {
     return (
-       <View>
-         <ProductListItem  product = {products[0]}  />
+       <ScrollView>
+         <ProductListItem  product = {products[5]}  />
          <ProductListItem  product = {products[1]}  />
-       </View>
+       </ScrollView>
   );
 }
 
+
+
+
+
+  

@@ -1,8 +1,23 @@
+export type Product = {
+  id: number;
+  image: string | null;
+  name: string;
+  price: number;
+};
+
+export interface OrderItem {
+  id: number;
+  order_id: number;
+  size: string;
+  quantity: number;
+  product_id: number;
+  product: Product;  // singular
+}
 export interface Order {
   id: number;
   created_at: string;
   total: number;
-  status: string; 
+  status: string;
   user_id: string;
-  order_items: any[]; 
+  order_items: OrderItem[];
 }
