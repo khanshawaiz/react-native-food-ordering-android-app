@@ -3,7 +3,7 @@ import { StyleSheet, Text, View  } from 'react-native';
 export default function TabTwo() {
   return (
     <View style={styles.container}>
-      <Text>Welcome to Settings Tab!</Text>
+      <Text>Welcome to Orders tab!</Text>
     </View>
   );
 }
