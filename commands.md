@@ -4,7 +4,7 @@ EXPO APP - DAILY WORKFLOW
 
 1 FOR Andriod Studio :
 ----------------------------------------
-Run emulator on Andriod Studio
+Run emulator on Andriod Studioa
 Run: adb devices in cmd
 
 Terminal (every time):
