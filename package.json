@@ -1,9 +1,10 @@
 {
+  "schema": "https://json.schemastore.org/package.json",
   "name": "foodordering",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
-    "start": "expo start",
+    "start": "expo start --skip-native-check",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web"
