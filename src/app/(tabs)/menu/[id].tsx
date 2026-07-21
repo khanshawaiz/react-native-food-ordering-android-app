@@ -1,16 +1,45 @@
-import { View, Text } from "react-native";
+import { View, Text, Image, StyleSheet } from "react-native";
 import { useLocalSearchParams, Stack } from "expo-router";
+import products from "@data/products";
+import { defaultPizzaImage } from "@/components/ProductListItem";
 
-const ProductDetails = () => {
+export default function ProductDetails() {
   const { id } = useLocalSearchParams();
+  const product = products.find((p) => p.id.toString() === id);
+
+  if (!product) {
+    return <Text>Product not found</Text>;
+  }
 
   return (
-    <View>
-      <Stack.Screen options={{ title: 'Details' +id}} />
-
-      <Text style={{ fontSize: 20 }}>Product Details for id: {id}</Text>
+    <View style={styles.container}>
+      <Stack.Screen options={{ title: product.name, headerTitleAlign: 'center', headerShown: true}} />
+      <Image
+        source={{ uri: product.image || defaultPizzaImage }}
+        style={styles.image}
+        resizeMode="cover"
+      />
+      <Text style={styles.price}>${product.price}</Text>
     </View>
   );
-};
+}
 
-export default ProductDetails;
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+    flex: 1,
+    padding: 20,
+    alignItems: 'center',
+  },
+  image: {
+    width: '80%',
+    aspectRatio: 1,
+    borderRadius: 9999,
+    marginVertical: 20,
+  },
+  price: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'black',
+  },
+});
