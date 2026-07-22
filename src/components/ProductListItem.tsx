@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import colors from '../constants/colors';
 import { Product } from '../types';
-import { Link } from 'expo-router';
+import { Link, useSegments } from 'expo-router';
 
 export const defaultPizzaImage =
   'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/default.png';
@@ -11,17 +11,38 @@ type ProductListItemProps = {
 };
 
 const ProductListItem = ({ product }: ProductListItemProps) => {
+  const segments = useSegments();
+  const isAdmin = segments[0] === '(admin)';
+
+  const content = (
+    <Pressable style={styles.container}>
+      <Image
+        source={{ uri: product.image || defaultPizzaImage }}
+        style={styles.image}
+        resizeMode="contain"
+      />
+      <Text style={styles.title}>{product.name}</Text>
+      <Text style={styles.price}>${product.price}</Text>
+    </Pressable>
+  );
+
+  if (isAdmin) {
+    return (
+      <Link
+        href={{ pathname: '/(admin)/menu/[id]', params: { id: product.id } }}
+        asChild
+      >
+        {content}
+      </Link>
+    );
+  }
+
   return (
-    <Link href={`./${product.id}`} asChild>
-      <Pressable style={styles.container}>
-        <Image
-          source={{ uri: product.image || defaultPizzaImage }}
-          style={styles.image}
-          resizeMode="contain"
-        />
-        <Text style={styles.title}>{product.name}</Text>
-        <Text style={styles.price}>${product.price}</Text>
-      </Pressable>
+    <Link
+      href={{ pathname: '/(user)/menu/[id]', params: { id: product.id } }}
+      asChild
+    >
+      {content}
     </Link>
   );
 };
