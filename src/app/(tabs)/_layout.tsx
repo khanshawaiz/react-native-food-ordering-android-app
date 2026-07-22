@@ -1,32 +1,36 @@
 // RULE: If you add a new screen inside (tabs)/, register it here with <Tabs.Screen name="..." />
-
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Tabs } from 'expo-router';
 import { useColorScheme } from 'react-native';
 import Colors from '../../constants/colors';
+
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>['name'];
   color: string;
 }) {
   return <FontAwesome size={20} style={{ marginBottom: -3 }} {...props} />;
 }
+
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+
   return (
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
       }}
     >
-    <Tabs.Screen name= "index" options = {{href: null}} />
+      <Tabs.Screen name="index" options={{ href: null }} />
+
       <Tabs.Screen
-         name="menu"
-         options={{
-           title: 'Menu',
-           headerShown: false,
-           tabBarIcon: ({ color }) => <TabBarIcon name="cutlery" color={color} />,
-         }}
+        name="menu"
+        options={{
+          title: 'Menu',
+          headerShown: false,
+          tabBarIcon: ({ color }) => <TabBarIcon name="cutlery" color={color} />,
+        }}
       />
+
       <Tabs.Screen
         name="two"
         options={{

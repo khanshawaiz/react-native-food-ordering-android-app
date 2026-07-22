@@ -21,3 +21,9 @@ export interface Order {
   user_id: string;
   order_items: OrderItem[];
 }
+export type CartItem = {
+  id: string;
+  product: Product;
+  size: 'S' | 'M' | 'L' | 'XL';
+  quantity: number;
+};
