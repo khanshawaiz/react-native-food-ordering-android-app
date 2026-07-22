@@ -18,9 +18,9 @@ export default function ProductDetails() {
 
   const product = products.find((p) => p.id.toString() === id);
 
- const addToCart = () => {
-     console.warn('Adding to cart');
- }
+  const addToCart = () => {
+     console.warn('Adding to cart, Size:  ', selectedSize);
+  } 
 
 
   if (!product) {
@@ -56,8 +56,7 @@ export default function ProductDetails() {
 
 
       <Text style={styles.price}>${product.price}</Text>
-      <Button onPress={addToCart}  text = "Add to cart" />
-      
+     <Button onPress={addToCart} text="Add to cart" style={{ width: '100%' }} />
 
 
 
@@ -100,5 +99,6 @@ price: {
   fontSize: 18,
   fontWeight: 'bold',
   color: 'black',
+  marginTop : 'auto',
 },
 });
