@@ -7,7 +7,7 @@ declare module "expo-router" {
   export * from 'expo-router/build';
 
   // prettier-ignore
-  type StaticRoutes = `/` | `/(admin)/` | `/(admin)` | `/(admin)/menu/` | `/menu/` | `/(admin)/menu` | `/(admin)/menu/_layout` | `/menu/_layout` | `/(admin)/two` | `/two` | `/(admin)/_layout` | `/_layout` | `/(user)/` | `/(user)` | `/(user)/menu/` | `/(user)/menu` | `/(user)/menu/_layout` | `/(user)/two` | `/(user)/_layout` | `/cart`;
+  type StaticRoutes = `/` | `/(admin)/` | `/(admin)` | `/(admin)/menu/create` | `/menu/create` | `/(admin)/menu/` | `/menu/` | `/(admin)/menu` | `/(admin)/menu/_layout` | `/menu/_layout` | `/(admin)/two` | `/two` | `/(admin)/_layout` | `/_layout` | `/(user)/` | `/(user)` | `/(user)/menu/` | `/(user)/menu` | `/(user)/menu/_layout` | `/(user)/two` | `/(user)/_layout` | `/cart`;
   // prettier-ignore
   type DynamicRoutes<T extends string> = `/(admin)/menu/${SingleRoutePart<T>}` | `/menu/${SingleRoutePart<T>}` | `/(user)/menu/${SingleRoutePart<T>}`;
   // prettier-ignore

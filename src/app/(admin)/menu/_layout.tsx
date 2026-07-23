@@ -1,7 +1,7 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import Colors from '@/constants/colors';
+import { FontAwesome } from '@expo/vector-icons';
 import { Link, Stack } from 'expo-router';
 import { Pressable } from 'react-native';
-import Colors from '../../../constants/colors';
 
 export default function MenuStack() {
   return (
@@ -10,9 +10,9 @@ export default function MenuStack() {
         name="index"
         options={{
           title: 'Menu',
-          headerTitleAlign: 'center',
+          headerTitleAlign: 'center',   // <-- ADD THIS LINE
           headerRight: () => (
-            <Link href="/" asChild>
+            <Link href="/(admin)/menu/create" asChild>
               <Pressable>
                 {({ pressed }) => (
                   <FontAwesome
@@ -27,6 +27,7 @@ export default function MenuStack() {
           ),
         }}
       />
+
       <Stack.Screen
         name="[id]"
         options={{
