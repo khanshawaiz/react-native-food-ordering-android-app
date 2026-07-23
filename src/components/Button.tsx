@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import colors from '@/constants/colors';
+import colors from '../constants/colors';
 import { forwardRef } from 'react';
 
 type ButtonProps = {

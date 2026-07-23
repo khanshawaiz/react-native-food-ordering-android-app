@@ -22,7 +22,7 @@ const CartContext = createContext<CartType>({
 });
 
 export default function CartProvider({ children }: PropsWithChildren) {
- const [items, setItems] = useState<CartItem[]>([]);
+  const [items, setItems] = useState<CartItem[]>([]);
 
   const total = items.reduce(
     (sum, item) => sum + item.product.price * item.quantity,
@@ -38,10 +38,11 @@ export default function CartProvider({ children }: PropsWithChildren) {
       return;
     }
 
-    const newCartItem = {
+    const newCartItem: CartItem = {
       id: randomUUID(),
-      product,
-      size,
+      product: product,
+      product_id: product.id,  // ✅ ADDED: required by CartItem type
+      size: size,
       quantity: 1,
     };
 

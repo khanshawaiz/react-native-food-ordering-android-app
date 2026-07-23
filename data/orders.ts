@@ -18,7 +18,7 @@ const orders: Order[] = [
         size: 'M',
         quantity: 2,
         product_id: products[0].id,
-        product: products[0],  
+        products: products[0],  // ✅ FIXED: plural
       },
       {
         id: 2,
@@ -26,7 +26,7 @@ const orders: Order[] = [
         size: 'L',
         quantity: 1,
         product_id: products[1].id,
-        product: products[1],  
+        products: products[1],  // ✅ FIXED: plural
       },
     ],
   },
@@ -43,7 +43,7 @@ const orders: Order[] = [
         size: 'M',
         quantity: 2,
         product_id: products[3].id,
-        product: products[3], 
+        products: products[3],  // ✅ FIXED: plural
       },
     ],
   },
@@ -60,7 +60,7 @@ const orders: Order[] = [
         size: 'M',
         quantity: 1,
         product_id: products[3].id,
-        product: products[3], 
+        products: products[3],  // ✅ FIXED: plural
       },
       {
         id: 2,
@@ -68,7 +68,7 @@ const orders: Order[] = [
         size: 'M',
         quantity: 1,
         product_id: products[7].id,
-        product: products[7], 
+        products: products[7],  // ✅ FIXED: plural
       },
       {
         id: 3,
@@ -76,7 +76,7 @@ const orders: Order[] = [
         size: 'L',
         quantity: 1,
         product_id: products[8].id,
-        product: products[8],  
+        products: products[8],  // ✅ FIXED: plural
       },
     ],
   },
