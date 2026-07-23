@@ -15,6 +15,12 @@ export default function RootIndex() {
           <Text style={styles.buttonText}>Admin</Text>
         </Pressable>
       </Link>
+      {/* ADD THIS BLOCK */}
+      <Link href="/sign-in" asChild>
+        <Pressable style={styles.button}>
+          <Text style={styles.buttonText}>Sign in</Text>
+        </Pressable>
+      </Link>
     </View>
   );
 }
