@@ -1,7 +1,9 @@
-﻿import { Stack, useLocalSearchParams } from 'expo-router';
-import { View, Text, Image, StyleSheet } from 'react-native';
+﻿import { Link, Stack, useLocalSearchParams } from 'expo-router';
+import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
 import products from '@data/products';
 import { defaultPizzaImage } from '@/components/ProductListItem';
+import { FontAwesome } from '@expo/vector-icons';
+import Colors from '../../../constants/colors';
 
 const ProductDetailsScreen = () => {
   const { id } = useLocalSearchParams();
@@ -14,6 +16,29 @@ const ProductDetailsScreen = () => {
 
   return (
     <View style={styles.container}>
+      {/* New header with pencil icon */}
+      <Stack.Screen
+        options={{
+          title: 'Menu',
+          headerTitleAlign: 'center',
+          headerRight: () => (
+            <Link href={`/(admin)/menu/create?id=${id}`} asChild>
+              <Pressable>
+                {({ pressed }) => (
+                  <FontAwesome
+                    name="pencil"
+                    size={25}
+                    color={Colors.light.tint}
+                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                  />
+                )}
+              </Pressable>
+            </Link>
+          ),
+        }}
+      />
+
+      {/* Existing product title (overrides the "Menu" title when this screen is active) */}
       <Stack.Screen options={{ title: product.name }} />
 
       <Image
@@ -22,7 +47,7 @@ const ProductDetailsScreen = () => {
       />
 
       <Text style={styles.title}>{product.name}</Text>
-      <Text style={styles.price}></Text>
+      <Text style={styles.price}>${product.price}</Text>
     </View>
   );
 };

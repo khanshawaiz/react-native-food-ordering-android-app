@@ -1,7 +1,7 @@
-import Colors from '@/constants/colors';
-import { FontAwesome } from '@expo/vector-icons';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Link, Stack } from 'expo-router';
 import { Pressable } from 'react-native';
+import Colors from '../../../constants/colors';
 
 export default function MenuStack() {
   return (
@@ -10,7 +10,7 @@ export default function MenuStack() {
         name="index"
         options={{
           title: 'Menu',
-          headerTitleAlign: 'center',   // <-- ADD THIS LINE
+          headerTitleAlign: 'center',
           headerRight: () => (
             <Link href="/(admin)/menu/create" asChild>
               <Pressable>
@@ -28,26 +28,8 @@ export default function MenuStack() {
         }}
       />
 
-      <Stack.Screen
-        name="[id]"
-        options={{
-          title: 'Menu',
-          headerRight: () => (
-            <Link href="/" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="pencil"
-                    size={25}
-                    color={Colors.light.tint}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
-        }}
-      />
+      {/* The [id] screen now defines its own header inside its component */}
+      <Stack.Screen name="[id]" />
     </Stack>
   );
 }
