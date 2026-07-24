@@ -1,49 +1,37 @@
-﻿import { Link, Stack } from 'expo-router';
-import { View, StyleSheet, Pressable, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
+import React from 'react';
+import Button from '../components/Button';
+import { Link, Redirect } from 'expo-router';
+import { useAuth } from '@/providers/AuthProvider';
+import { supabase } from '@/lib/supabase';
 
-export default function RootIndex() {
+const index = () => {
+  const { session, loading, isAdmin } = useAuth();
+
+  if (loading) {
+    return <ActivityIndicator />;
+  }
+
+  if (!session) {
+    return <Redirect href={'/sign-in'} />;
+  }
+
+  if (!isAdmin) {
+    return <Redirect href={'/(user)'} />;
+  }
+
   return (
-    <View style={styles.container}>
-      <Stack.Screen options={{ headerShown: false }} />
-      <Link href="/(user)" asChild>
-        <Pressable style={styles.button}>
-          <Text style={styles.buttonText}>User</Text>
-        </Pressable>
+    <View style={{ flex: 1, justifyContent: 'center', padding: 10 }}>
+      <Link href={'/(user)'} asChild>
+        <Button text="User" />
       </Link>
-      <Link href="/(admin)" asChild>
-        <Pressable style={styles.button}>
-          <Text style={styles.buttonText}>Admin</Text>
-        </Pressable>
+      <Link href={'/(admin)'} asChild>
+        <Button text="Admin" />
       </Link>
-      {/* ADD THIS BLOCK */}
-      <Link href="/sign-in" asChild>
-        <Pressable style={styles.button}>
-          <Text style={styles.buttonText}>Sign in</Text>
-        </Pressable>
-      </Link>
+
+      <Button onPress={() => supabase.auth.signOut()} text="Sign out" />
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-  },
-  button: {
-    backgroundColor: '#2f95dc',
-    paddingVertical: 15,
-    paddingHorizontal: 40,
-    borderRadius: 10,
-    marginVertical: 10,
-    width: '60%',
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: '600',
-  },
-});
+export default index;

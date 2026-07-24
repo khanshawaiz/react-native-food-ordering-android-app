@@ -1,4 +1,4 @@
-﻿import { Stack } from 'expo-router';
+import { Stack } from 'expo-router';
 
 export default function MenuStack() {
   return (
@@ -8,3 +8,5 @@ export default function MenuStack() {
     </Stack>
   );
 }
+
+

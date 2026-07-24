@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Image } from 'react-native';
 import React from 'react';
-import Colors from '../constants/colors';
+import Colors from '../constants/Colors';
 import { CartItem } from '../types';
 import { defaultPizzaImage } from './ProductListItem';
 import { FontAwesome } from '@expo/vector-icons';

@@ -4,7 +4,7 @@ import orders from '../../../../data/orders';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { FlatList, Text, View, Pressable } from 'react-native';
 import { Order, OrderStatusList } from '../../../types';
-import Colors from '../../../constants/colors';
+import Colors from '../../../constants/Colors';
 
 export default function OrderDetailsScreen() {
   const { id } = useLocalSearchParams();
@@ -61,3 +61,4 @@ export default function OrderDetailsScreen() {
     </View>
   );
 }
+

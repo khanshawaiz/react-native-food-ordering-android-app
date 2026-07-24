@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
-import colors from '../constants/colors';
+import Colors from '../constants/Colors';
 import { Product } from '../types';
 import { Link, useSegments } from 'expo-router';
 
@@ -69,6 +69,6 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: 15,
-    color: colors.light.tint,
+    color: Colors.light.tint,
   },
 });

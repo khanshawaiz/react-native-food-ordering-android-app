@@ -1,4 +1,4 @@
-﻿import { FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import products from '@data/products';
 import ProductListItem from '@/components/ProductListItem';
 
@@ -13,3 +13,5 @@ export default function Menu() {
     />
   );
 }
+
+

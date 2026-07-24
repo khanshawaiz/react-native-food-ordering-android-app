@@ -1,6 +1,6 @@
 import Button from '@/components/Button';
 import { defaultPizzaImage } from '@/components/ProductListItem';
-import Colors from '../../../constants/colors';
+import Colors from '../../../constants/Colors';
 import { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, Image, Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
@@ -163,3 +163,4 @@ const styles = StyleSheet.create({
 });
 
 export default CreateProductScreen;
+

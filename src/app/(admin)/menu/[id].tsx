@@ -1,9 +1,9 @@
-﻿import { Link, Stack, useLocalSearchParams } from 'expo-router';
+import { Link, Stack, useLocalSearchParams } from 'expo-router';
 import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
 import products from '@data/products';
 import { defaultPizzaImage } from '@/components/ProductListItem';
 import { FontAwesome } from '@expo/vector-icons';
-import Colors from '../../../constants/colors';
+import Colors from '../../../constants/Colors';
 
 const ProductDetailsScreen = () => {
   const { id } = useLocalSearchParams();
@@ -60,3 +60,5 @@ const styles = StyleSheet.create({
 });
 
 export default ProductDetailsScreen;
+
+

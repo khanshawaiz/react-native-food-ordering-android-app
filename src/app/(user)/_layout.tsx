@@ -1,10 +1,10 @@
-// RULE: If you add a new screen inside (tabs)/, register it here with <Tabs.Screen name="..." />
-
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Tabs } from 'expo-router';
-import { useColorScheme } from 'react-native';
+import { Link, Redirect, Tabs } from 'expo-router';
+import { Pressable, useColorScheme, Button } from 'react-native';
 
-import Colors from '../../constants/colors';
+import Colors from '../../constants/Colors';
+import { useAuth } from '@/providers/AuthProvider';
+import { supabase } from '@/lib/supabase';
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>['name'];
@@ -15,6 +15,11 @@ function TabBarIcon(props: {
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const { session } = useAuth();
+
+  if (!session) {
+    return <Redirect href={'/'} />;
+  }
 
   return (
     <Tabs
@@ -23,15 +28,15 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen name="index" options={{ href: null }} />
-
       <Tabs.Screen
         name="menu"
         options={{
           title: 'Menu',
-          headerShown: false,
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="cutlery" color={color} />
+          headerShown: true,
+          headerRight: () => (
+            <Button title="Sign out" onPress={() => supabase.auth.signOut()} />
           ),
+          tabBarIcon: ({ color }) => <TabBarIcon name="cutlery" color={color} />,
         }}
       />
       <Tabs.Screen

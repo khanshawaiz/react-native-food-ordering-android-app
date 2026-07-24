@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import colors from '../constants/colors';
+import Colors from '../constants/Colors';
 import { forwardRef } from 'react';
 
 type ButtonProps = {
@@ -18,7 +18,7 @@ const Button = forwardRef<View | null, ButtonProps>(
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.light.tint,
+    backgroundColor: Colors.light.tint,
     paddingVertical: 18,
     paddingHorizontal: 40,
     alignItems: 'center',
