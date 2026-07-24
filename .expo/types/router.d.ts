@@ -7,7 +7,7 @@ declare module "expo-router" {
   export * from 'expo-router/build';
 
   // prettier-ignore
-  type StaticRoutes = `/` | `/(admin)/` | `/(admin)` | `/(admin)/menu/create` | `/menu/create` | `/(admin)/menu/` | `/menu/` | `/(admin)/menu` | `/(admin)/menu/_layout` | `/menu/_layout` | `/(admin)/orders/` | `/orders/` | `/(admin)/orders` | `/(admin)/orders/_layout` | `/orders/_layout` | `/(admin)/_layout` | `/_layout` | `/(auth)/sign-in` | `/sign-in` | `/(auth)/sign-up` | `/sign-up` | `/(auth)/_layout` | `/(user)/` | `/(user)` | `/(user)/menu/` | `/(user)/menu` | `/(user)/menu/_layout` | `/(user)/orders/` | `/(user)/orders` | `/(user)/orders/_layout` | `/(user)/_layout` | `/cart`;
+  type StaticRoutes = `/` | `/(admin)/` | `/(admin)` | `/(admin)/menu/create` | `/menu/create` | `/(admin)/menu/` | `/menu/` | `/(admin)/menu` | `/(admin)/menu/_layout` | `/menu/_layout` | `/(admin)/orders/` | `/orders/` | `/(admin)/orders` | `/(admin)/orders/list/_layout` | `/orders/list/_layout` | `/(admin)/orders/_layout` | `/orders/_layout` | `/(admin)/_layout` | `/_layout` | `/(auth)/sign-in` | `/sign-in` | `/(auth)/sign-up` | `/sign-up` | `/(auth)/_layout` | `/(user)/` | `/(user)` | `/(user)/menu/` | `/(user)/menu` | `/(user)/menu/_layout` | `/(user)/orders/` | `/(user)/orders` | `/(user)/orders/_layout` | `/(user)/_layout` | `/cart` | `/(admin)/orders/list/archive` | `/orders/list/archive` | `/(admin)/orders/list/` | `/orders/list/` | `/(admin)/orders/list`;
   // prettier-ignore
   type DynamicRoutes<T extends string> = `/(admin)/menu/${SingleRoutePart<T>}` | `/menu/${SingleRoutePart<T>}` | `/(admin)/orders/${SingleRoutePart<T>}` | `/orders/${SingleRoutePart<T>}` | `/(user)/menu/${SingleRoutePart<T>}` | `/(user)/orders/${SingleRoutePart<T>}`;
   // prettier-ignore
