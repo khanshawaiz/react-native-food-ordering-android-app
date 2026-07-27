@@ -12,8 +12,9 @@ const SignInScreen = () => {
 
   async function signInWithEmail() {
     setLoading(true);
+    const trimmedEmail = email.trim();
     const { error } = await supabase.auth.signInWithPassword({
-      email,
+      email: trimmedEmail,
       password,
     });
 
@@ -81,4 +82,3 @@ const styles = StyleSheet.create({
 });
 
 export default SignInScreen;
-

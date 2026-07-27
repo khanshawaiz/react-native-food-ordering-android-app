@@ -42,29 +42,29 @@ export default function AuthProvider({ children }: PropsWithChildren) {
 
       setSession(session);
 
-      if (session) {
-        // fetch profile
-        const { data } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', session.user.id)
-          .single();
-          console.log('Profile fetched:', data);  // <-- add this
-        setProfile(data || null);
-      }
+     if (session) {
+        const { data, error } = await supabase
+       .from('profiles')
+       .select('*')
+       .eq('id', session.user.id)
+       .single();
+       console.log('Profile fetch error:', error);
+       console.log('Profile fetch data:', data);
+       setProfile(data || null);
+}
 
       setLoading(false);
     };
 
     fetchSession();
-    supabase.auth.onAuthStateChange((_event, session) => {
+      supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
   }, []);
 
   return (
     <AuthContext.Provider
-      value={{ session, loading, profile, isAdmin: profile?.group === 'ADMIN' }}
+      value={{ session, loading, profile, isAdmin: profile?.group === 'ADMIN' || session?.user?.user_metadata?.role === 'admin' }}
     >
       {children}
     </AuthContext.Provider>

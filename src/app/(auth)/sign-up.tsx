@@ -12,7 +12,8 @@ const SignUpScreen = () => {
 
   async function signUpWithEmail() {
     setLoading(true);
-    const { error } = await supabase.auth.signUp({ email, password });
+    const trimmedEmail = email.trim();
+    const { error } = await supabase.auth.signUp({ email: trimmedEmail, password });
 
     if (error) Alert.alert(error.message);
     setLoading(false);
@@ -78,4 +79,3 @@ const styles = StyleSheet.create({
 });
 
 export default SignUpScreen;
-
