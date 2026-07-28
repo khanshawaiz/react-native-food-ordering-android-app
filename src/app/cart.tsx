@@ -1,36 +1,29 @@
-import { View, Text, FlatList, StyleSheet } from 'react-native';
-import React from 'react';
-import { Stack } from 'expo-router';
-import CartListItem from '../components/CartListItem';
-import { useCart } from '../providers/CartProvider';
+﻿import { View, Text, Platform, FlatList } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 
-export default function CartScreen() {
-  const { items, total } = useCart();
+import { useCart } from '@/providers/CartProvider';
+import CartListItem from '@/components/CartListItem';
+import Button from '@/components/Button';
+
+const CartScreen = () => {
+  const { items, total, checkout } = useCart();
 
   return (
-    <View style={styles.container}>
-      <Stack.Screen options={{ title: 'Cart', headerTitleAlign: 'center' }} />
+    <View style={{ padding: 10 }}>
       <FlatList
         data={items}
         renderItem={({ item }) => <CartListItem cartItem={item} />}
-        keyExtractor={(item) => item.id}
-        ListFooterComponent={() => (
-          <Text style={styles.total}>Total: ${total.toFixed(2)}</Text>
-        )}
+        contentContainerStyle={{ gap: 10 }}
       />
+
+      <Text style={{ marginTop: 20, fontSize: 20, fontWeight: '500' }}>
+        Total: ${total}
+      </Text>
+      <Button onPress={checkout} text="Checkout" />
+
+      <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-  },
-  total: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginTop: 20,
-  },
-});
+export default CartScreen;

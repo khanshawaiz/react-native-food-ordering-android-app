@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+﻿import { View, Text, StyleSheet, Pressable } from 'react-native';
 import React from 'react';
-import { Order } from '../types';
+import { Order, Tables } from '../types';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import dayjs from 'dayjs';
 import { Link, useSegments } from 'expo-router';
@@ -8,16 +8,14 @@ import { Link, useSegments } from 'expo-router';
 dayjs.extend(relativeTime);
 
 type OrderListItemProps = {
-  order: Order;
+  order: Tables<'orders'>;
 };
 
 const OrderListItem = ({ order }: OrderListItemProps) => {
   const segments = useSegments();
-  const group = segments[0] ?? '(user)';
-  const href = `/${group}/orders/${order.id}` as any; // ✅ Fix: cast to any
 
   return (
-    <Link href={href} asChild>
+    <Link href={`/${segments[0]}/orders/${order.id}`} asChild>
       <Pressable style={styles.container}>
         <View>
           <Text style={styles.title}>Order #{order.id}</Text>
