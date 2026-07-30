@@ -31,7 +31,7 @@ const CreateProductScreen = () => {
 
   const { mutate: insertProduct } = useInsertProduct();
   const { mutate: updateProduct } = useUpdateProduct();
-  const { data: updatingProduct } = useProduct(id, isUpdating);
+  const { data: updatingProduct } = useProduct(id);
   const { mutate: deleteProduct } = useDeleteProduct();
 
   const router = useRouter();
@@ -94,12 +94,15 @@ const CreateProductScreen = () => {
     );
   };
 
-  const onUpdate = () => {
+  const onUpdate = async () => {
     if (!validateInput()) {
       return;
     }
+
+    const imagePath = await uploadImage();
+
     updateProduct(
-      { id, name, price: parseFloat(price), image },
+      { id, name, price: parseFloat(price), image: imagePath },
       {
         onSuccess: () => {
           resetFields();

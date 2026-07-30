@@ -1,10 +1,11 @@
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, Pressable } from 'react-native';
 import React from 'react';
 import Colors from '../constants/Colors';
 import { CartItem } from '../types';
-import { defaultPizzaImage } from './ProductListItem';
 import { FontAwesome } from '@expo/vector-icons';
 import { useCart } from '../providers/CartProvider';
+import { defaultPizzaImage } from './ProductListItem';
+import RemoteImage from './RemoteImage';
 
 type CartListItemProps = {
   cartItem: CartItem;
@@ -12,13 +13,16 @@ type CartListItemProps = {
 
 const CartListItem = ({ cartItem }: CartListItemProps) => {
   const { updateQuantity } = useCart();
+
   return (
     <View style={styles.container}>
-      <Image
-        source={{ uri: cartItem.product.image || defaultPizzaImage }}
+      <RemoteImage
+        path={cartItem.product.image}
+        fallback={defaultPizzaImage}
         style={styles.image}
         resizeMode="contain"
       />
+
       <View style={{ flex: 1 }}>
         <Text style={styles.title}>{cartItem.product.name}</Text>
         <View style={styles.subtitleContainer}>
@@ -33,6 +37,7 @@ const CartListItem = ({ cartItem }: CartListItemProps) => {
           color="gray"
           style={{ padding: 5 }}
         />
+
         <Text style={styles.quantity}>{cartItem.quantity}</Text>
         <FontAwesome
           onPress={() => updateQuantity(cartItem.id, 1)}
