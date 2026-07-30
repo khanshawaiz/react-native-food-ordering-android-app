@@ -10,8 +10,8 @@ const ExpoSecureStoreAdapter = {
   removeItem: (key: string) => SecureStore.deleteItemAsync(key),
 };
 
-const supabaseUrl = 'https://cqvlenpjhasmjknvuvwx.supabase.co';
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNxdmxlbnBqaGFzbWprbnZ1dnd4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ4ODI2NjYsImV4cCI6MjEwMDQ1ODY2Nn0.k_y7fvgIzQISO9UVNInm7qhwF6w0FK9kgQREkZ8jcmY';
+const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL || "";
+const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON || "";
 
 export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
   auth: {
