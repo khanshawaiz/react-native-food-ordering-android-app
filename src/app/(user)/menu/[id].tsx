@@ -1,63 +1,82 @@
-import { View, Text, Image, StyleSheet, Pressable, ActivityIndicator } from "react-native";
-import { useLocalSearchParams, Stack, useRouter } from "expo-router";
-import { defaultPizzaImage } from "@/components/ProductListItem";
-import { useState } from "react";
-import Button from "@/components/Button";
-import { useCart } from "@/providers/CartProvider";
-import { PizzaSize } from "@/types";
-import { useProduct } from "@/api/products";
+﻿import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Pressable,
+  ActivityIndicator,
+} from 'react-native';
+import { defaultPizzaImage } from '@/components/ProductListItem';
+import { useState } from 'react';
+import Button from '@components/Button';
+import { useCart } from '@/providers/CartProvider';
+import { PizzaSize } from '@/types';
+import { useProduct } from '@/api/products';
+import RemoteImage from '@/components/RemoteImage';
 
+const sizes: PizzaSize[] = ['S', 'M', 'L', 'XL'];
 
-const sizes: ('S' | 'M' | 'L' | 'XL')[] = ['S', 'M', 'L', 'XL'];
-
-export default function ProductDetails() {
+const ProductDetailsScreen = () => {
   const { id: idString } = useLocalSearchParams();
   const id = parseFloat(typeof idString === 'string' ? idString : idString[0]);
-  const {data: product, error, isLoading} = useProduct(id);  
+  const { data: product, error, isLoading } = useProduct(id);
 
-
-
-  const [selectedSize, setSelectedSize] = useState<'S' | 'M' | 'L' | 'XL'>('S');
   const { addItem } = useCart();
 
+  const router = useRouter();
 
-  
+  const [selectedSize, setSelectedSize] = useState<PizzaSize>('M');
 
-if (isLoading) {
-  return <ActivityIndicator />
-}
-   
-if (error) {
-  return <Text>Failed to fetch products</Text>
-}
-
-
-
-
- const addToCart = () => {
-    console.log('Adding to cart');
-    console.log('Size:', selectedSize);
+  const addToCart = () => {
+    if (!product) {
+      return;
+    }
     addItem(product, selectedSize);
-};
+    router.push('/cart');
+  };
+
+  if (isLoading) {
+    return <ActivityIndicator />;
+  }
+
+  if (error) {
+    return <Text>Failed to fetch products</Text>;
+  }
 
   return (
     <View style={styles.container}>
-      <Stack.Screen options={{ title: product.name, headerTitleAlign: 'center', headerShown: true }} />
-      <Image
-        source={{ uri: product.image || defaultPizzaImage }}
+      <Stack.Screen options={{ title: product.name }} />
+
+      <RemoteImage
+        path={product?.image}
+        fallback={defaultPizzaImage}
         style={styles.image}
-        resizeMode="cover"
       />
 
       <Text>Select size</Text>
       <View style={styles.sizes}>
         {sizes.map((size) => (
           <Pressable
-            onPress={() => setSelectedSize(size)}
-            style={[styles.size, { backgroundColor: selectedSize === size ? 'gainsboro' : 'white' }]}
+            onPress={() => {
+              setSelectedSize(size);
+            }}
+            style={[
+              styles.size,
+              {
+                backgroundColor: selectedSize === size ? 'gainsboro' : 'white',
+              },
+            ]}
             key={size}
           >
-            <Text style={[styles.sizeText, { color: selectedSize === size ? 'black' : 'gray' }]}>
+            <Text
+              style={[
+                styles.sizeText,
+                {
+                  color: selectedSize === size ? 'black' : 'gray',
+                },
+              ]}
+            >
               {size}
             </Text>
           </Pressable>
@@ -65,35 +84,37 @@ if (error) {
       </View>
 
       <Text style={styles.price}>${product.price}</Text>
-      <Button onPress={addToCart} text="Add to cart" style={{ width: '100%' }} />
+      <Button onPress={addToCart} text="Add to cart" />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     flex: 1,
-    padding: 20,
-    alignItems: 'center',
+    padding: 10,
   },
   image: {
-    width: '80%',
+    width: '100%',
     aspectRatio: 1,
-    borderRadius: 9999,
-    marginVertical: 20,
   },
+  price: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 'auto',
+  },
+
   sizes: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '80%',
-    marginVertical: 20,
+    justifyContent: 'space-around',
+    marginVertical: 10,
   },
   size: {
     backgroundColor: 'gainsboro',
-    width: 55,
+    width: 50,
     aspectRatio: 1,
-    borderRadius: 9999,
+    borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -101,11 +122,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '500',
   },
-  price: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: 'black',
-    marginTop: 'auto',
-  },
 });
 
+export default ProductDetailsScreen;
