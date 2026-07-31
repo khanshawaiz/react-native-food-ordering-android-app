@@ -1,9 +1,5 @@
 user:
 
-person@gmail.com
-person12345
-
-
 human@gmail.com
 human12345
 

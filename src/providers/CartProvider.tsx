@@ -4,6 +4,7 @@ import { randomUUID } from 'expo-crypto';
 import { useInsertOrder } from '@/api/orders';
 import { useRouter } from 'expo-router';
 import { useInsertOrderItems } from '@/api/order-items';
+import { initialisePaymentSheet, openPaymentSheet } from '@/lib/stripe';
 
 type Product = Tables<'products'>;
 
@@ -32,7 +33,6 @@ const CartProvider = ({ children }: PropsWithChildren) => {
   const router = useRouter();
 
   const addItem = (product: Product, size: CartItem['size']) => {
-    // if already in cart, increment quantity
     const existingItem = items.find(
       (item) => item.product === product && item.size === size
     );
@@ -43,7 +43,7 @@ const CartProvider = ({ children }: PropsWithChildren) => {
     }
 
     const newCartItem: CartItem = {
-      id: randomUUID(), // generate
+      id: randomUUID(),
       product,
       product_id: product.id,
       size,
@@ -53,7 +53,6 @@ const CartProvider = ({ children }: PropsWithChildren) => {
     setItems([newCartItem, ...items]);
   };
 
-  // updateQuantity
   const updateQuantity = (itemId: string, amount: -1 | 1) => {
     setItems(
       items
@@ -75,7 +74,13 @@ const CartProvider = ({ children }: PropsWithChildren) => {
     setItems([]);
   };
 
-  const checkout = () => {
+  const checkout = async () => {
+    await initialisePaymentSheet(Math.floor(total * 100));
+    const payed = await openPaymentSheet();
+    if (!payed) {
+      return;
+    }
+
     insertOrder(
       { total },
       {
