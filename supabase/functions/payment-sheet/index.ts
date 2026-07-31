@@ -45,20 +45,3 @@ serve(async (req) => {
   }
 });
 
-/* 
-========================================================================
- ?? HOW TO RUN & TEST THIS FUNCTION LOCALLY
- ========================================================================
-
- STEP 1: Start the local Supabase stack (if not already running)
- ------------------------------------------------------------------------
- Open a terminal and run:
-     npx supabase start
-
- STEP 2: Serve the function locally (keep this terminal open)
- ------------------------------------------------------------------------
- Run this command in a terminal:
-     npx supabase functions serve --env-file .env payment-sheet
-
- 
-*/
