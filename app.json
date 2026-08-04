@@ -15,6 +15,14 @@
     },
     "android": {
       "package": "com.anonymous.FoodOrdering"
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "d5e62794-ae66-4395-aa75-e13407d441f3"
+      }
     }
   }
 }
